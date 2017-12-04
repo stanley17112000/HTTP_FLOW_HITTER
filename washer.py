@@ -2,6 +2,7 @@ import requests
 import random
 import json
 import time
+from requests import exceptions
 from threading import Thread
 
 #put the target url link, using http get
@@ -101,11 +102,11 @@ def QueryThread():
                 print( "Proxy : {}".format( http_proxy ) )
                 print( "Request Success......" )
                 query_cnt = query_cnt + 1
-            except ConnectionError:
+            except requests.ConnectionError:
                 print ( 'Error : {}'.format( 'Connection Error' ) )
                 print ( "Bad proxy {} is removed".format( http_proxy ) )
                 ip_list.remove( http_proxy )
-            except Timeout:
+            except requests.Timeout:
                 print ( 'Error : {}'.format( 'Request Timeout' ) )
                 print ( "Bad proxy {} is removed".format( http_proxy ) )
                 ip_list.remove( http_proxy )
